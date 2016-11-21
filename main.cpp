@@ -4,16 +4,17 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <cstdint>
 
 #if defined(__x86_64__) || defined(_M_X64)
 #include "hde64.h"
 const char app_name[] = "minfuncfind64";
-typedef uint64_t uint;
 #elif defined(__i386) || defined(_M_IX86)
 #include "hde32.h"
 const char app_name[] = "minfuncfind32";
-typedef uint32_t uint;
 #endif
+
+#define uint uintptr_t
 
 #define IS_RET(hde) (hde.opcode == 0xC3||hde.opcode == 0xCB||hde.opcode == 0xC2||hde.opcode == 0xCA)
 #define PATTERN_TARGET_LENGTH 50 // The approximate length it will aim for.
